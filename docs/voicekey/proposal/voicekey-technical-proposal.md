@@ -1,15 +1,25 @@
-# TECHNICAL PROPOSAL
+# VoiceKey
 
-## Phase 2 - Technical Submission
+## Offline translation companion for short, face-to-face EN ↔ VI conversations
 
 | Item | Details |
 |---|---|
-| Team / Project Name | VoiceKey (working project name) |
+| Team / Project Name | VoiceKey |
 | Submission Date | 21/08/2026 |
 | Version | v1.4 - evidence-refresh and claim-boundary revision |
 | Confidentiality | Restricted - Challenge Review Only |
 
-> **Evidence boundary.** This proposal distinguishes validated external evidence from proposed product targets. Any size, latency, power, BOM, or quality number labeled "target", "budget", or "estimate" must be measured on the selected handset and prototype before it becomes a public claim. The proposal deliberately does not claim direct USB access to a phone NPU. A model card or repository being available also does **not** establish commercial redistribution eligibility.
+> **How to read this proposal.** Research and product references show that the underlying technology and adjacent product formats exist. VoiceKey's size, latency, power, cost, audio advantage, and translation quality are **targets**, not measured product results. They become claims only after testing on the named phones and prototype. The accessory does not access a phone NPU directly; a model being available does not automatically make it commercially shippable.
+
+## Reviewer Snapshot
+
+| Question | Clear answer |
+|---|---|
+| What is VoiceKey? | A small USB-C accessory and Android app for short, turn-by-turn conversations. The accessory provides two microphones, Push-to-Talk, and a recording LED; the phone shows the bilingual text and runs the local AI. |
+| Who is it for first? | Vietnamese frontline workers and English-speaking supervisors, trainers, or technicians in factories, warehouses, field service, and onboarding. |
+| What is different? | It reuses the phone's screen and compute instead of adding another screen, battery, modem, or AI computer. It prioritizes a shared transcript, visible recording state, and offline operation after language-pack installation. |
+| What is supported now? | A research-backed design, an EN ↔ VI technical path, a hardware concept, cost bands, and a test plan. Adjacent products and papers support feasibility; they do not prove VoiceKey performance. |
+| What must be proven next? | USB-audio reliability on supported phones, Airplane-Mode operation, noisy-environment capture, EN ↔ VI quality, latency, thermals, and commercial rights for every shipped model and voice. |
 
 ---
 
@@ -17,15 +27,23 @@
 
 ### 1.1 Problem Overview
 
-People already carry powerful smartphones, yet generic translation apps can be awkward while speaking, phone microphones vary in noise, and cloud-dependent workflows can fail exactly where communication matters. The initial pilot hypothesis is that Vietnamese operators, foreign supervisors, technicians, and trainers need to exchange short instructions in factories, warehouses, field service, and onboarding; this target context must be validated through discovery and the supervised pilot. A mistranslated safety instruction can never be a safety control, but faster shared understanding may reduce avoidable delay and repetition. The reviewed adjacent products use Bluetooth earbuds, companion apps, or separate handheld screens; these patterns motivate a phone-attached, transcript-first alternative rather than prove market demand or performance. [M1][M2][M3][M4]
+People already carry smartphones, but a phone-only translation app can be awkward during a short live conversation. The user must hold the phone, manage turn-taking, and trust the microphone in a noisy place. Cloud-based translation can also fail when connectivity, privacy, or service availability is limited.
+
+VoiceKey starts with a specific pilot hypothesis: Vietnamese frontline workers and English-speaking supervisors, trainers, and technicians need to exchange short instructions in factories, warehouses, field service, and onboarding. The pilot must validate that need. VoiceKey is an assistive communication tool, not a safety control: critical instructions still require read-back and local procedures. Existing earbuds, companion apps, and handheld translators show relevant interaction patterns, but they do not prove demand or performance for VoiceKey. [M1][M2][M3][M4]
 
 ### 1.2 Proposed Solution
 
-VoiceKey is a proposed compact wired USB-C companion for Android. It is designed to add two close microphones, physical Push-to-Talk, a visible recording LED, and an intended USB Audio Class path whose actual route, reconnect behaviour, and permissions must be verified on each supported handset; the Android app supplies the screen, battery, storage, and compute. After a signed language pack is installed, the release requirement is that VAD -> ASR -> neural machine translation -> optional TTS runs locally and presents a large bilingual transcript. The first scope is EN <-> VI; Southeast Asian languages expand only after language-specific quality gates pass.
+VoiceKey is a proposed compact USB-C companion for Android. It adds two close microphones, a physical Push-to-Talk button, and a visible recording LED. The Android app uses the phone's screen, battery, storage, and compute.
+
+After a signed language pack is installed, the app is designed to convert speech to text, translate it locally, optionally speak the result, and show both languages in large text. The first scope is English ↔ Vietnamese. USB-audio routing, reconnect behaviour, and permissions must pass on every supported phone before release. Additional Southeast Asian languages are added only after their own quality tests pass.
 
 ### 1.3 Key Value Proposition
 
-The intended value proposition is release-gated offline operation—no runtime API call after required packs are installed—combined with better interaction rather than redundant compute: wired capture, a hardware PTT, and a partner-visible transcript use the phone already in hand. EN <-> VI is held to Vietnamese-specific, real-context measurements before expansion. If those gates pass, the product will publish pair-specific packs, latency percentiles, supported phones, and privacy behavior rather than a universal accuracy claim.
+VoiceKey aims to offer three practical benefits:
+
+1. **Offline by design.** After language packs are installed, translation must work with the network disabled; the app must not silently fall back to cloud processing.
+2. **Built for two people.** Push-to-Talk, a recording LED, and large bilingual text make the state of the conversation visible to both people.
+3. **Evidence before expansion.** English ↔ Vietnamese is tested in realistic conditions before new languages, phones, or performance claims are added. If the gates pass, VoiceKey will publish supported phones, pack versions, latency results, and privacy behaviour by language pair.
 
 ---
 
@@ -77,7 +95,7 @@ The first beachhead is not consumer travel. It is short, face-to-face conversati
 
 ### 3.1 Industry Problem & Solution Fit
 
-Within the reviewed product set, the adjacent offerings have different hardware, connectivity, and screen patterns; none is a direct substitute for the proposed USB-C, phone-attached, offline-first workflow. This is a bounded market observation, not a claim that no competitor exists.
+The products reviewed use different combinations of earbuds, companion apps, handheld screens, and connectivity. None matches the proposed USB-C, phone-attached, offline-first workflow exactly. This does not mean VoiceKey has no competitors; it explains the specific product gap the pilot will test.
 
 | Existing Approach | Specific Failure Mode or Trade-Off | VoiceKey Response |
 |---|---|---|
@@ -100,11 +118,11 @@ This positioning is based on official product/experience evidence from Timekettl
 | AI architecture | Opaque service or one broad model claim | Modular ASR/MT/TTS; measured device, pack, and language-pair limits |
 | Privacy | Cloud/online mode may be integral or ambiguous | Release requirement: local runtime audio/inference with opt-in data retention, verified by egress and retention tests |
 
-The innovation is therefore a **compute-and-interaction split**: the phone supplies the screen, storage, battery, and candidate local-inference runtime, while the accessory is intended to improve capture consistency, tactile turn-taking, and visible state for live work. Comparative capture/UX superiority is a release claim only after the paired noisy-slice and field-task tests. This design creates a lower hardware surface than an autonomous translator while providing a more intentional communication UX than a generic app.
+The central design choice is simple: the phone handles the display, storage, battery, and local AI; the accessory handles the physical conversation controls and audio capture. VoiceKey can claim a microphone or usability advantage only after the noisy-environment and field-task tests. This avoids building a second computer while creating a clearer live-conversation experience than a generic app.
 
 ### 3.3 Initial Business Model and Route to Market
 
-The primary route is B2B/B2B2C pilot deployment, not a commodity travel gadget launch. A pilot kit includes Link hardware, the offline Android app, an EN-VI language pack, deployment guide, and an evidence report from the site-specific test set. Revenue can come from hardware and a separately priced, opt-in enterprise service for signed language-pack updates, glossary management, device management, and validation support. The offline core remains usable without a recurring cloud inference fee.
+The primary route is B2B/B2B2C pilot deployment, not a commodity travel gadget launch. A pilot kit includes the VoiceKey companion, the offline Android app, an EN-VI language pack, a deployment guide, and an evidence report from the site-specific test set. Revenue can come from hardware and a separately priced, opt-in enterprise service for signed language-pack updates, glossary management, device management, and validation support. The offline core remains usable without a recurring cloud inference fee.
 
 The first commercial proof is a 10-30 user supervised pilot in one operational context. Success is measured by task completion, repeated-instruction reduction, privacy acceptance, and transparent error/fallback behavior - not only download count or claimed language count.
 
@@ -144,6 +162,8 @@ Public retail prices are useful market anchors, not a recommended VoiceKey list 
 ## 4. AI Approach & Technical Design
 
 ### 4.1 System Pipeline Overview
+
+In plain language, VoiceKey follows six steps: **press to talk → capture audio → detect the end of speech → turn speech into text → translate → show both languages**, with optional spoken output. Each step is measured separately so that a failure can be identified and explained to the user.
 
 ```mermaid
 flowchart LR
@@ -359,7 +379,7 @@ If a lab already exists, the incremental equipment budget is approximately $300-
 
 ```mermaid
 flowchart TB
-    subgraph Link[VoiceKey accessory]
+    subgraph Accessory[VoiceKey accessory]
         MIC[Dual MEMS mic]
         MCU[USB audio MCU]
         PTT[PTT + status LED]
@@ -538,7 +558,7 @@ The 12-month direct-pilot cost includes direct pilot cash and only the 12-month 
 |---:|---|---|
 | 0-10 s | Problem scene: Vietnamese operator and English trainer repeat a short instruction in a noisy area | Use case only; do not claim accuracy |
 | 10-20 s | Phone screen shows installed EN-VI pack version, checksum, selected model tier; network is turned off | Offline precondition |
-| 20-35 s | Attach Link, phone shows the actual routed capture device, LED changes Ready -> Recording when PTT is held, then shows the fallback state once | Hardware, route-verification, and privacy-state evidence |
+| 20-35 s | Attach the VoiceKey companion; the phone shows the actual routed capture device, the LED changes Ready → Recording when PTT is held, then the fallback state is shown once | Hardware, route-verification, and privacy-state evidence |
 | 35-55 s | English turn and Vietnamese turn; show source text, final translation, and time overlay from endpoint | Pair-specific latency, not a generic "instant" claim |
 | 55-65 s | Toggle a noise sample / show a failed utterance | Honest fallback: "Please repeat" rather than fabricated translation |
 | 65-75 s | Optional local TTS; show no-network status and Clear All action | Offline/privacy evidence |

@@ -4,7 +4,7 @@ Date: 2026-08-20
 
 ## Executive Summary
 
-The market is split into two strong patterns: phone-coupled translation earbuds and standalone handheld translators. Earbud products usually optimize for natural conversation and portability, but they depend on Bluetooth, app pairing, and cloud-assisted workflows. Handheld products usually solve text display, camera translation, and always-on connectivity better, but they are bulkier and less invisible in use. A USB-C phone-attached device is still a meaningful gap: it can win on deterministic audio capture, lower pairing friction, and a better transcript-first UX on the phone.
+The market is split into two strong patterns: phone-coupled translation earbuds and standalone handheld translators. Earbud products usually optimize for natural conversation and portability, but they depend on Bluetooth, app pairing, and cloud-assisted workflows. Handheld products usually solve text display, camera translation, and always-on connectivity better, but they are bulkier and less invisible in use. A USB-C phone-attached device is still a meaningful gap to test: it may reduce pairing steps and support a better transcript-first UX on the phone, but its audio route and task benefit must be measured on each supported phone.
 
 The strongest verified differentiator for the proposed VoiceKey is not "more languages" or "another pair of earbuds." Those claims are already crowded and mostly marketing-led. The better position is offline-first, Android-first, wired via USB-C, with visible text on the phone, low operational friction, and clear privacy boundaries. The biggest risk is overclaiming offline universality. In this market, that reads as hype unless the product clearly states language coverage, latency, and cloud fallback behavior.
 
@@ -73,14 +73,14 @@ Why this fits:
 
 - Earbud competitors win on discretion but not on visual transcript workflow.
 - Handheld competitors win on text and camera features but are less embedded in the phone UX.
-- A USB-C accessory can own the middle: deterministic connection, easier power management, less Bluetooth pairing pain, and a better fit for offline inference on-device or in the companion app.
+- A USB-C accessory can occupy the middle if its wired audio route proves reliable: it may reduce Bluetooth pairing steps and retain the phone transcript, but it must be compared with the phone-only baseline on each supported phone.
 
 ## Trade-Off Matrix
 
 | Option | Performance | Complexity | Maintenance | Cost | Fit for this project |
 |---|---|---|---|---|---|
-| USB-C phone-attached accessory | Best for deterministic audio path and direct phone transcript UX | Medium-high hardware/software integration | Medium | Medium | Best overall |
-| Bluetooth earbuds | Good portability, weaker deterministic capture | Medium | Medium-high because of pairing and audio edge cases | Medium | Good adjacent fit |
+| USB-C phone-attached accessory | Potentially lower pairing friction and direct phone transcript UX; audio route still needs per-phone validation | Medium-high hardware/software integration | Medium | Medium | Promising v1 experiment |
+| Bluetooth earbuds | Good portability; capture route and pairing behavior need testing | Medium | Medium-high because of pairing and audio edge cases | Medium | Good adjacent fit |
 | Standalone handheld | Good display and camera workflow | Lower app dependence, but more hardware surface area | Medium | High | Good backup reference, not the target form factor |
 | Crowdfunding clone | Cheap market signal, weak reliability | High risk | High risk | Unclear | Poor fit |
 

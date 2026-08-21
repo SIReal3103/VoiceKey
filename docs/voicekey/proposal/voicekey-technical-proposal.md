@@ -122,7 +122,7 @@ The product has two separate cost layers. The companion is a low-power audio acc
 | Lean MVP engineering | USD 65k to 95k | Hardware, Android, local inference, QA, pilot preparation, and pre-scan advisory |
 | More complete first-release engineering | USD 95k to 145k | Full workstream planning band; formal certification remains quote-required |
 
-The pilot should measure repeated explanations, time to confirmed understanding, support requests, and user acceptance. It should not claim a return on investment before those values are observed. Before procurement, the team needs a selected schematic, two comparable manufacturing quotes, a warranty and replacement plan, and a clear policy for customer-provided versus loaner phones. Component and cost anchors are listed in Section 5.3, and the full cost model is retained with the project documentation.
+The pilot should measure repeated explanations, time to confirmed understanding, support requests, and user acceptance. It should not claim a return on investment before those values are observed. Before procurement, the team needs a selected schematic, two comparable manufacturing quotes, a warranty and replacement plan, and a clear policy for customer-provided versus loaner phones. Component and cost anchors are listed in Section 5.3. Calculation and exclusion detail is in the [cost model](research/hardware-software-cost-model.md): direct pilot cash includes dongles, fixtures, labels or shipping, replacement reserve, and field support; it excludes NRE, loaner phones, formal certification, and lab capital unless a row explicitly states otherwise.
 
 ### 3.4 Commercial Model
 
@@ -161,7 +161,7 @@ The following are engineering budgets and candidate classes. They are not measur
 | Module | Candidate class | Size budget | Latency budget | Purpose and selection rule |
 |---|---|---:|---:|---|
 | Speech detection | Local VAD, such as [Silero VAD](https://github.com/snakers4/silero-vad) | About 2 MB class | <20 ms per chunk target | Detect start and end of a turn; verify behavior in noisy slices |
-| Speech recognition | [whisper.cpp](https://github.com/ggml-org/whisper.cpp) with a multilingual Whisper small baseline; Vietnamese-specific evaluation with [PhoWhisper](https://arxiv.org/abs/2406.02555) | 50 to 250 MB budget | Partial update <=500 ms after a one-second audio window; final text <=1.0 s after endpoint | Select after English-Vietnamese accuracy, memory, heat, and device test |
+| Speech recognition | Benchmark multilingual Whisper base and small variants through [whisper.cpp](https://github.com/ggml-org/whisper.cpp); compare them with [PhoWhisper](https://arxiv.org/abs/2406.02555) variants on named Vietnamese ASR test sets | Measured per candidate | Partial update <=500 ms after a one-second audio window; final text <=1.0 s after endpoint | Record actual quantized file size, runtime memory, accuracy, heat, and latency. Do not assume one shared size band. |
 | Translation | [OPUS-MT EN-VI](https://huggingface.co/Helsinki-NLP/opus-mt-en-vi) and [OPUS-MT VI-EN](https://huggingface.co/Helsinki-NLP/opus-mt-vi-en) evaluation candidates, with release-license review | 80 to 350 MB budget | <=1.5 s target after final text | Compare bilingual adequacy, protected terms, and device performance before choosing a shipping candidate |
 | Text-to-speech | Local runtime such as [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/) with a separately reviewed voice | 30 to 120 MB budget | <=0.7 s target before playback | Optional output only; do not ship a voice until license and quality review pass |
 | Glossary and confidence rules | Local approved terms, number checks, and uncertainty flags | Small | Immediate | Protect names, part codes, numbers, and site terms |
@@ -199,7 +199,7 @@ The test set combines public research data with consented short conversations fr
 | Protected terms and numbers | At least 90 percent correct on the held-out target-context set; each critical error is reviewed separately |
 | Bilingual translation adequacy | At least 80 percent of final turns rated adequate or better by bilingual reviewers using a fixed rubric |
 | Short-task completion | At least 80 percent of scripted tasks completed after normal human confirmation |
-| Offline and stability | All required turns pass in Airplane Mode; no hidden network request, crash, or route loss during the 30-minute session |
+| Offline and stability | All required turns pass both in Airplane Mode and in a network-enabled capture test that records zero VoiceKey outbound connections after the verified local pack is installed. Report the pack version and hash, capture method, crashes, and route losses for the 30-minute session. |
 
 ---
 
@@ -228,7 +228,7 @@ Two current embedded platforms illustrate the future Edge hardware class. Qualco
 
 Android is the first platform because it documents USB host and accessory communication, USB audio, and microphone capture APIs. Actual behavior still needs a supported-phone matrix and route verification. [Android USB](https://developer.android.com/develop/connectivity/usb) [Android USB audio](https://source.android.com/docs/core/audio/usb) [Android AudioRecord](https://developer.android.com/reference/android/media/AudioRecord)
 
-iOS can support a phone-only experience through the built-in microphone and speaker using [AVAudioSession](https://developer.apple.com/documentation/avfaudio/avaudiosession/category-swift.struct/playandrecord). Apple now publishes a preliminary [AccessoryAccess](https://developer.apple.com/documentation/AccessoryAccess) framework for connected USB accessories, while its established [External Accessory](https://developer.apple.com/documentation/externalaccessory/) documentation is associated with MFi accessories. That is not a finished custom-USB product path for VoiceKey, so iOS is a later validation track.
+iOS can first be evaluated as a phone-only app using the built-in microphone and speaker through [AVAudioSession](https://developer.apple.com/documentation/avfaudio/avaudiosession/category-swift.struct/playandrecord). Apple's [AccessoryAccess USB entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.accessory-access.usb?changes=__1) is for macOS USB access, not an iOS USB-accessory path. A custom wired iPhone accessory is out of scope until it is demonstrated on a current Apple-supported iOS framework and hardware.
 
 ### 5.2 Form Factor, Components, and Power Budget
 
@@ -250,7 +250,7 @@ The target is deliberately low because the phone is the power source and the AI 
 
 All figures are USD planning estimates or public component-listing anchors. They are not a supplier quote, final bill of materials, or selling price.
 
-The component anchors include an [STUSB4500 controller class](https://www.st.com/en/interfaces-and-transceivers/stusb4500.html), [STM32U575 listing](https://www.mouser.com/en/ProductDetail/STMicroelectronics/STM32U575CIT6), [TLV320AIC3263 codec](https://www.ti.com/product/TLV320AIC3263), and [SPH0655 digital microphone listing](https://www.digikey.com/en/products/detail/syntiant/SPH0655LM4H-1-8/11506911). Assembly, enclosure, test, and manufacturing yield still need supplier quotes.
+The public anchors cover the [STM32U575 MCU](https://www.mouser.com/en/ProductDetail/STMicroelectronics/STM32U575CIT6), [TLV320AIC3263 codec](https://www.ti.com/product/TLV320AIC3263), and [SPH0655 digital microphone](https://www.digikey.com/en/products/detail/syntiant/SPH0655LM4H-1-8/11506911). The [STUSB4500](https://www.st.com/en/interfaces-and-transceivers/stusb4500.html) is an alternative sink and PD-controller reference only. It is excluded from the v1 passive USB-device CC BOM unless the selected schematic explicitly changes to a controller-based topology. Assembly, enclosure, test, and manufacturing yield still need supplier quotes.
 
 | BOM block | Planning cost per unit | Boundary |
 |---|---:|---|
@@ -318,7 +318,7 @@ The USB companion does not process the full AI pipeline in v1. The phone app own
 
 ### 6.3 Offline-First Design Principles
 
-- All required models and voices are in a signed local pack before the conversation begins.
+- Each pack contains a versioned manifest signed by a release key pinned in the app. Before activation, the app verifies the manifest signature and listed file hashes and rejects unsigned, tampered, or revoked packs. Key rotation and rollback behavior are release tests.
 - Runtime audio, speech recognition, translation, and optional speech output do not require a network connection.
 - A missing pack, invalid signature, unavailable microphone, or disconnected companion produces a clear local error, not a hidden cloud fallback.
 - Audio is discarded after processing by default. History is an explicit user choice.
@@ -347,7 +347,7 @@ The final submission must replace the role labels below with real names, short q
 | 1 | Phone-only baseline | Choose reference phone, install local EN-VI pack, record offline baseline | Weeks 1 to 2 |
 | 2 | Model bake-off | Compare ASR, translation, and optional TTS candidates; measure pack size, RAM, heat, and latency | Weeks 3 to 5 |
 | 3 | USB companion EVT | Build microphone, LED, and button prototype; verify attach, route, reconnect, and fallback | Weeks 6 to 8 |
-| 4 | Controlled demo | Run short two-person turns in Airplane Mode with visible source text, translation, and timing | Weeks 9 to 10 |
+| 4 | Controlled demo | Run short two-person turns in Airplane Mode and the network-enabled no-egress capture test, with visible source text, translation, and timing | Weeks 9 to 10 |
 | 5 | Small supervised pilot | Test 10 users, then expand only if quality, heat, and companion benefit pass | Weeks 11 to 14 |
 | 6 | Decision report | Publish supported phones, results, failures, cost update, and Edge decision | Weeks 15 to 16 |
 
@@ -385,9 +385,15 @@ The project should not submit a scripted marketing clip as its technical evidenc
 | [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/) | Local speech, VAD, Android, and TTS runtime research | Voice quality or commercial voice rights |
 | [Android USB](https://developer.android.com/develop/connectivity/usb) and [AOSP USB audio](https://source.android.com/docs/core/audio/usb) | Android USB and digital-audio mechanisms | Compatibility with every phone or accessory |
 | [Android AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) | Microphone capture and routed-device verification research | A companion microphone being active merely because it was requested |
-| [Apple AVAudioSession](https://developer.apple.com/documentation/avfaudio/avaudiosession/category-swift.struct/playandrecord) and [Apple AccessoryAccess](https://developer.apple.com/documentation/AccessoryAccess) | iOS phone-audio path and preliminary connected-accessory framework | A production custom USB-C iPhone path |
+| [Apple AVAudioSession](https://developer.apple.com/documentation/avfaudio/avaudiosession/category-swift.struct/playandrecord) | iOS phone-only microphone and speaker path | A custom wired iPhone accessory or generic USB-C accessory route |
 | [QCS6490](https://www.qualcomm.com/internet-of-things/products/q6-series/qcs6490) and [Genio 1200](https://www.mediatek.com/products/iot/genio-iot/genio-1200) | Example embedded compute classes for a future Edge module | VoiceKey Edge performance or cost |
 | [NIST AI RMF](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) | Human oversight framing for any future summaries or business drafts | Automated approval of an invoice, order, or safety action |
+
+### Core academic references
+
+- Nguyen et al. (2022), ["A High-Quality and Large-Scale Dataset for English-Vietnamese Speech Translation"](https://arxiv.org/abs/2208.04243), INTERSPEECH 2022. Supports the 508-hour EN-VI benchmark and its cascade-versus-end-to-end result.
+- Le, Nguyen, and Nguyen (2024), ["PhoWhisper: Automatic Speech Recognition for Vietnamese"](https://arxiv.org/abs/2406.02555), ICLR 2024 Tiny Papers. Supports Vietnamese ASR candidate and evaluation context.
+- Doan et al. (2021), ["PhoMT: A High-Quality and Large-Scale Benchmark Dataset for Vietnamese-English Machine Translation"](https://aclanthology.org/2021.emnlp-main.369/), EMNLP 2021. Supports Vietnamese-English text-MT evaluation context.
 
 ## Appendix B. Comparable Products and Public Demos
 
@@ -395,20 +401,20 @@ The following links show adjacent product formats and user flows. They are not b
 
 | Platform | Product and direct link | What it is useful for | Evidence boundary |
 |---|---|---|---|
+| Product page | [Timekettle W4 Pro](https://www.timekettle.co/pages/w4-pro) | Phone-coupled earbud form factor and vendor pack workflow | Vendor product description only; not an EN-VI offline comparator or a benchmark |
 | YouTube | [Timekettle W4 Pro official tutorial](https://www.youtube.com/watch?v=llJjfzfHR7c) | Setup and translation-mode flow | Official vendor workflow only |
-| YouTube | [Timekettle M3 phone-pairing tutorial](https://www.youtube.com/watch?v=khFgXsnTMmM) | App coupling and pairing flow | Official vendor workflow only |
-| YouTube | [Timekettle offline-resource activation](https://www.youtube.com/watch?v=zxQ4-jEc58E) | Language-pack activation pattern | Does not prove VoiceKey offline quality |
-| YouTube | [Pocketalk getting started](https://www.youtube.com/watch?v=ah0RdIh-GjM) | Handheld startup and translation flow | Official vendor workflow only |
-| YouTube | [Vasco E1 conversation-start tutorial](https://www.youtube.com/watch?v=c9ntTqmfSs8) | Wearable two-person conversation flow | Official vendor workflow only |
-| Facebook | [Timekettle M3 official video](https://www.facebook.com/TimekettleTech/videos/timkettle-m3-language-translator-earbuds/5674147279363963/?locale=ms_MY) | Social product presentation | May be region or login restricted; vendor marketing only |
-| Douyin | [Timekettle store/tutorial collection](https://www.douyin.com/shipin/7277811363270084644) | Public app-pairing and conversation-format discovery | Social or store content; no performance claim |
-| TikTok Shop | [Timekettle W4 Pro listing](https://shop.tiktok.com/us/pdp/timekettle-w4-pro-ai-translation-earbuds-133-languages-wireless-headphones/1729671968857166344) | Retail category and product language | Retail listing, not a demo or technical source |
+| Product page and manual | [Pocketalk S2 Plus](https://pocketalk.com/product/pocketalk-s2-plus-5-year-esim-white) and [S2 setup manual](https://manual.pocketalk.com/pts2/en/01.html) | Screen-first handheld workflow and connectivity setup | Vendor documentation, not a benchmark |
+| YouTube | [Pocketalk How to Translate](https://www.youtube.com/watch?v=93i6N-KHhco) | Hands-on handheld translation steps | Official vendor workflow only |
+| Product page | [Vasco Translator E1](https://vasco-translator.com/translators/vasco-translator-e1) and [Vasco Translator V4](https://vasco-translator.com/translators/vasco-translator-v4) | Wearable and handheld product formats | Vendor product descriptions, not a benchmark |
+| YouTube | [Vasco Translator E1 official demo](https://www.youtube.com/watch?v=C92rY4D9dAk) | Wearable conversation framing | Official vendor workflow only |
+| Facebook | [Timekettle W4 Pro vendor video](https://www.facebook.com/timekettleglobal/videos/welcome-to-the-official-w4-pro-ai-interpreter-earbuds-tutorial-in-this-video-wel/501790599342399/) | Secondary social workflow example | May be region or login restricted; vendor marketing only |
+| Douyin | [Timekettle W3 versus M3 official-store video](https://www.douyin.com/shipin/7277811363270084644) | Vendor-described interaction difference: W3 hands-free speaking versus M3 button-triggered turns | Social store content; no accuracy, latency, or offline claim |
 
 ## Appendix C. VoiceKey Evidence Demo Shot List
 
 | Time | Shot | What it proves |
 |---:|---|---|
-| 0 to 10 seconds | Show the exact Android phone, app build, EN-VI pack version, and Airplane Mode | Test setup and offline precondition |
+| 0 to 10 seconds | Show the exact Android phone, app build, EN-VI pack version, and Airplane Mode. Include the recorded result of the network-enabled no-egress test. | Test setup and offline precondition |
 | 10 to 20 seconds | Show the phone microphone route, then attach the companion and show the actual route change and LED state | The input route is verified, not assumed |
 | 20 to 40 seconds | English turn followed by Vietnamese turn; show partial text, final bilingual text, and an endpoint-to-result timer | Turn-based real-time flow under stated conditions |
 | 40 to 50 seconds | Play optional TTS and show that capture is paused | Echo-loop control in v1 |

@@ -6,8 +6,9 @@ VoiceKey is a proposed Android-first system for short, face-to-face English-Viet
 
 1. Read [the technical proposal](voicekey-technical-proposal.md) for the product decision, real-time translation flow, hardware scope, research basis, and pilot gates.
 2. Download the rendered [DOCX](voicekey-technical-proposal-v2.1.docx) or [PDF](voicekey-technical-proposal-v2.1.pdf) for reviewer sharing.
-3. Use `research/` to review papers, platform constraints, commercial products, pricing, and public demo sources.
-4. Use `reports/` to review earlier evidence checks and assumptions.
+3. Read the [evidence consolidation](reports/260821-research-evidence-consolidation.md) for the paper findings, selected public product demos, and evidence limits.
+4. Use `research/` to review papers, platform constraints, commercial products, pricing, and public demo sources.
+5. Use `reports/` to review the detailed evidence checks and assumptions.
 
 ## What This Documentation Does and Does Not Claim
 
@@ -24,5 +25,6 @@ Before formal filing, replace the team-role placeholders with real names and cre
 - `voicekey-technical-proposal-v2.1.pdf`: rendered review document
 - `research/voicekey-edge-coprocessor-feasibility.md`: research basis for the phone-first and future Edge-compute decision
 - `research/`: background research and source records
+- `reports/260821-research-evidence-consolidation.md`: judge-facing evidence summary with direct paper and product-demo links
 - `reports/`: audits, evidence boundaries, and recommendations
 - `plan.md`: preparation and delivery notes

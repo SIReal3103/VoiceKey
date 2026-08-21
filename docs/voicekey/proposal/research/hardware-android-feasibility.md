@@ -190,7 +190,7 @@ Fit:
 Pros:
 - Best balance of feasibility and differentiation.
 - Preserves phone compute, battery, app UI, and offline model agility.
-- Standard USB Audio Class is broadly compatible.
+- USB Audio Class uses a standard interface, but microphone routing and reconnect behavior still require per-phone validation.
 - Can add a physical button and obvious recording LED.
 
 Cons:

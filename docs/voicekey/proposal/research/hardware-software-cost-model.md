@@ -2,7 +2,7 @@
 title: "VoiceKey Cost and Implementation Model"
 date: "2026-08-20"
 status: "research-complete"
-plan: "/Users/macbook/Documents/ChatGPT/OneVoice/plans/260820-0945-offline-mobile-translator-proposal/plan.md"
+plan: "../plan.md"
 ---
 
 # VoiceKey Cost and Implementation Model

@@ -9,7 +9,7 @@ status: completed
 
 ## Summary
 
-The technical direction remains credible: a **low-power USB audio/interaction accessory** paired with an Android app that runs a local, turn-based EN↔VI pipeline is a rational MVP architecture. It is not yet a proven OneVoice product. The strongest evidence supports the platform mechanisms, Vietnamese-language research rationale, and existence of adjacent commercial workflows; it does **not** establish OneVoice latency, accuracy, offline behaviour, microphone advantage, thermals, battery impact, or commercial readiness.
+The technical direction remains credible: a **low-power USB audio/interaction accessory** paired with an Android app that runs a local, turn-based EN↔VI pipeline is a rational MVP architecture. It is not yet a proven VoiceKey product. The strongest evidence supports the platform mechanisms, Vietnamese-language research rationale, and existence of adjacent commercial workflows; it does **not** establish VoiceKey latency, accuracy, offline behaviour, microphone advantage, thermals, battery impact, or commercial readiness.
 
 This refresh found additional directly linkable demonstrations on YouTube, Douyin, Facebook, and TikTok Shop. They are useful for observing onboarding, pairing, transcript, and conversation UX. They remain social/retail evidence—not performance benchmarks.
 
@@ -17,7 +17,7 @@ This refresh found additional directly linkable demonstrations on YouTube, Douyi
 
 | Evidence class | It can establish | It cannot establish |
 |---|---|---|
-| Primary platform/paper source | Mechanism, dataset, benchmark result, licence boundary | OneVoice product performance |
+| Primary platform/paper source | Mechanism, dataset, benchmark result, licence boundary | VoiceKey product performance |
 | Official product page or tutorial | Product availability, documented workflow, vendor claim | Independent latency/accuracy/offline proof |
 | Independent hands-on video | A creator-observed workflow or failure mode | Controlled benchmark or general result |
 | TikTok/Douyin/Facebook post or shop listing | Social format, public product example, observable UI flow | Accuracy, latency, demand, offline robustness, or safety |
@@ -43,11 +43,11 @@ The dongle is not an AI compute module and does not gain direct access to the ph
 | Android supports a host/accessory model and USB digital audio mechanisms. | [Android USB host/accessory overview](https://developer.android.com/develop/connectivity/usb), [AOSP USB digital audio](https://source.android.com/docs/core/audio/usb) | Does not make every Android phone or USB-audio route compatible. |
 | Cascade-first is a defensible EN↔VI research direction. | [PhoST](https://arxiv.org/abs/2208.04243) reports 508 audio hours and 331K triplets, with its reported cascade result ahead of an end-to-end comparator on that benchmark. | A benchmark result, not an on-phone latency or user-task result. |
 | Vietnamese-specific ASR/MT data exists for a meaningful evaluation plan. | [PhoWhisper](https://arxiv.org/abs/2406.02555), [PhoMT](https://aclanthology.org/2021.emnlp-main.369/) | Does not prove any selected model/runtime runs on a phone or is commercially shippable. |
-| Adjacent commercial categories are real: phone-coupled earbuds, standalone translators, and managed apps. | Timekettle, Vasco, Pocketalk product/tutorial corpus below | Confirms formats and workflows, not an empty competitive category or market demand for OneVoice. |
+| Adjacent commercial categories are real: phone-coupled earbuds, standalone translators, and managed apps. | Timekettle, Vasco, Pocketalk product/tutorial corpus below | Confirms formats and workflows, not an empty competitive category or market demand for VoiceKey. |
 
-## What Is Not Yet Proven for OneVoice
+## What Is Not Yet Proven for VoiceKey
 
-- A real OneVoice prototype and public demo.
+- A real VoiceKey prototype and public demo.
 - End-to-end EN↔VI offline operation on an exact Android build/phone SKU.
 - P50/P95 latency, WER/CER, MT adequacy, TTS intelligibility, or microphone improvement over the phone mic.
 - Actual USB audio route, attach/re-attach stability, 30-minute thermal/battery behaviour, and zero runtime network egress.
@@ -95,7 +95,7 @@ Previously collected, still useful official/independent references include [Pock
 
 The crawler could not reliably retrieve direct TikTok video posts in this refresh. The accessible source is a direct [Timekettle W4 Pro TikTok Shop listing](https://shop.tiktok.com/us/pdp/timekettle-w4-pro-ai-translation-earbuds-133-languages-wireless-headphones/1729671968857166344), sold by Timekettle Tech. Its text includes AI-generated retail material and vendor product claims, so it is retained only as an active retail/category signal—not as a demo or technical reference.
 
-## Recommended OneVoice Evidence Demo
+## Recommended VoiceKey Evidence Demo
 
 1. Identify exact phone SKU, Android build, app build, pack version/hash, and test set.
 2. Show installation first, then turn on Airplane Mode and display a no-egress/network check.
@@ -108,5 +108,4 @@ The crawler could not reliably retrieve direct TikTok video posts in this refres
 
 - Direct TikTok video links remain hard to reproduce because the platform blocked crawler access; manual brand-account capture is needed before using a TikTok clip in a formal appendix.
 - Facebook and Douyin links can be region/login-sensitive; preserve a dated screenshot/transcript when a filing depends on one.
-- No OneVoice prototype, pilot results, exact target handset, or real project demo was provided; none can be inferred from public product videos.
-
+- No VoiceKey prototype, pilot results, exact target handset, or real project demo was provided; none can be inferred from public product videos.

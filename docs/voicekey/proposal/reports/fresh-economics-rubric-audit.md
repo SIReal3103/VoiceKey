@@ -152,13 +152,13 @@ Use this replacement note and scenario table:
 
 #### [NONBLOCKING for the rubric; blocking for a real commercial quote] Pricing structure needs an owner/TCO boundary
 
-The comparator treatment is appropriately cautious. Official pages still support the regular $449 Timekettle W4 Pro price and $389/$449 Vasco E1/V4 price anchors; the $381.65 Timekettle price is a date-bound campaign price. The proposal correctly says these are not equivalent BOMs and should not become a OneVoice list price.
+The comparator treatment is appropriately cautious. Official pages still support the regular $449 Timekettle W4 Pro price and $389/$449 Vasco E1/V4 price anchors; the $381.65 Timekettle price is a date-bound campaign price. The proposal correctly says these are not equivalent BOMs and should not become a VoiceKey list price.
 
 What remains missing is the purchaser boundary. “Reuses the user’s Android phone” is a cost allocation, not a free input. A business customer needs to know whether a supported handset is customer-provided, loaned, or included; who owns device compatibility, MDM/admin, firmware support, warranty/RMA, tax/import/shipping, and return/refurbishment exposure.
 
 Add this sentence to Section 3.5:
 
-> **Comparator boundary.** Comparator retail prices are category anchors, not a OneVoice deployed-TCO or price comparison. They exclude or bundle different handset, connectivity, warranty, language-pack, support, tax, and channel terms. OneVoice’s base case assumes a customer-provided handset from the supported-device matrix; any loaner/managed-phone offer is separately scoped and priced.
+> **Comparator boundary.** Comparator retail prices are category anchors, not a VoiceKey deployed-TCO or price comparison. They exclude or bundle different handset, connectivity, warranty, language-pack, support, tax, and channel terms. VoiceKey’s base case assumes a customer-provided handset from the supported-device matrix; any loaner/managed-phone offer is separately scoped and priced.
 
 Then add this gate table without inventing a retail price:
 
@@ -170,7 +170,7 @@ Then add this gate table without inventing a retail price:
 | Deployment fee | Site acceptance scope, training, glossary/pack setup, travel/site-access assumptions | Open |
 | Optional managed service | Included pack/update/governance/admin/support scope, billing unit, service level; confirm zero cloud-inference dependency | Open |
 
-No OneVoice list price is required by this rubric. Do not add one merely to look commercially complete.
+No VoiceKey list price is required by this rubric. Do not add one merely to look commercially complete.
 
 #### [MEDIUM] Pilot, NRE, and lab boundaries still use overlapping language
 

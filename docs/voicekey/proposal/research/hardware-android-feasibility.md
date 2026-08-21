@@ -2,7 +2,7 @@
 title: "Hardware Feasibility: Android-Connected USB-C Translator Dongle"
 date: "2026-08-20"
 status: "research-complete"
-plan: "/Users/macbook/Documents/ChatGPT/OneVoice/plans/260820-0945-offline-mobile-translator-proposal/plan.md"
+plan: "../plan.md"
 ---
 
 # Hardware Feasibility: Android-Connected USB-C Translator Dongle

@@ -351,7 +351,7 @@ Khuyến nghị sau khi rà soát lại là **giữ kiến trúc cascade và thu
 
 Điều phải giữ thật chặt:
 
-- `whisper.cpp`, Silero VAD, Piper/Sherpa-ONNX và CTranslate2 là **engineering candidates**, không phải benchmark điện thoại của OneVoice.
+- `whisper.cpp`, Silero VAD, Piper/Sherpa-ONNX và CTranslate2 là **engineering candidates**, không phải benchmark điện thoại của VoiceKey.
 - NLLB chứng minh coverage multilingual tốt, không chứng minh đóng gói Android nhẹ/latency đủ tốt, và distilled 600M model card hiện không đủ điều kiện commercial production.
 - Một voice pack tiếng Việt tồn tại không chứng minh license thương mại, độ dễ nghe, cách đọc số/tên riêng hay thermal ổn.
 - EN-VI public benchmark chưa thay thế được test set hội thoại tại đúng site. Cần dùng benchmark công khai + bộ test có consent + đo trên handset thật.

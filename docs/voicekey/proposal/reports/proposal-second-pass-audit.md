@@ -29,7 +29,7 @@ The revised proposal now has a defensible evidence chain for the most consequent
 | Scientific papers | Prefer primary paper/ACL/arXiv source; map each claim to what it actually proves | Pass with caveat: no local benchmark has been run |
 | Repositories/model cards | Treat as implementation evidence only | Pass: wording now avoids turning Android/runtime leads into product performance facts |
 | Product demos | Separate official/independent workflow demo from performance proof | Pass: 6 accessible videos added; social links remain secondary evidence |
-| Current prices | Use date, region/page boundary, and bundle/recurring-cost caveat | Pass: price is an anchor, not a OneVoice price recommendation |
+| Current prices | Use date, region/page boundary, and bundle/recurring-cost caveat | Pass: price is an anchor, not a VoiceKey price recommendation |
 | Cost model | Split direct pilot cash, per-unit estimates, equipment, and NRE | Pass: each is labelled planning/pre-quote where applicable |
 | Benefits | Use formula and illustrative proxy, not promised ROI | Pass: site baseline and actual minutes avoided are required |
 
